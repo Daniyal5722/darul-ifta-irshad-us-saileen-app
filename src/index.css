@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --navy-deep: #061A34;
+    --navy-elevated: #132544;
+    --gold-burnished: #D4AF37;
+    --gold-light: #D1AC5B;
+    --surface-cream: #FBF9F3;
+    --emerald-verdict: #10B981;
+    --crimson-caution: #BE123C;
+  }
+}
+
+.font-urdu {
+  font-family: 'Noto Nastaliq Urdu', 'Noto Serif Arabic', serif;
+}
+
+.font-arabic {
+  font-family: 'Amiri', 'Noto Serif Arabic', serif;
+}
+
+.font-display {
+  font-family: 'Manrope', sans-serif;
+}
+
+.font-body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Safe area insets for mobile */
+.pb-safe {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 16px);
+}
+.pt-safe {
+  padding-top: max(env(safe-area-inset-top, 0px), 12px);
+}
+

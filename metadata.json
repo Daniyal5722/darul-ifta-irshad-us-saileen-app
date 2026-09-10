@@ -1,0 +1,6 @@
+{
+  "name": "Darul Ifta Irshad Al-Saileen",
+  "description": "Official mobile application for Darul Ifta Irshad Al-Saileen Karachi, providing authentic Islamic Fatwa discovery, scholarly consultations, online inquiries, and publications.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
