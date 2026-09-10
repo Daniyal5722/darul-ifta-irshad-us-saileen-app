@@ -203,3 +203,27 @@ export interface AskQuestionFormState {
   attachedFileName: string;
   confidentialityAccepted: boolean;
 }
+
+export interface PrayerTimeItem {
+  nameEn: string;
+  nameUr: string;
+  nameAr: string;
+  time: string;
+  rawTime?: string;
+  current?: boolean;
+  next?: boolean;
+}
+
+export interface DailyPrayerData {
+  hijriDate: string;
+  hijriDateEn: string;
+  hijriDateAr: string;
+  gregorianDate: string;
+  gregorianDateEn: string;
+  gregorianDateAr: string;
+  times: PrayerTimeItem[];
+  isOnline: boolean;
+  lastUpdated?: string;
+  sourceMethod?: string;
+}
+

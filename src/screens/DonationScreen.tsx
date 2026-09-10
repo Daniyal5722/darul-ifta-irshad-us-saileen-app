@@ -160,7 +160,7 @@ export const DonationScreen: React.FC<DonationScreenProps> = ({
           {t.receiptInstructions}
         </p>
         <a
-          href="https://wa.me/923017671222?text=السلام%20علیکم،%20دارالافتاء%20کے%20لیے%20تعاون%20کی%20رسید%20منسلک%20ہے۔"
+          href="https://wa.me/923332617671?text=السلام%20علیکم،%20دارالافتاء%20کے%20لیے%20تعاون%20کی%20رسید%20منسلک%20ہے۔"
           target="_blank"
           rel="noopener noreferrer"
           className="mt-1 w-full h-11 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all shadow-md"

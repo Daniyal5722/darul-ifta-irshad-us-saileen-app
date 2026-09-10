@@ -1,25 +1,11 @@
 import { Fatwa, Scholar, ServiceItem, Publication, NotificationItem } from '../types';
+import { getDefaultPrayerData } from '../services/prayerAndCalendarService';
 
 export const OFFICIAL_LOGO = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDUHYdlVTJB5dX0q9IcNeBYGZSZw5lJFQjQz-6yvhqgCA500_nbfqV12r2MLXLsSywhoLifcrc8hdwLnwUG842MKDwN2OYX5SbPR5b-zeuy_2cFFQI3aBvvjG8xqOGXheA3f9y81AH6-Aq4Q483No_UzpXeVYcjNWNyB4NsIWrtcjf1Qa3FVK04kRylqTyj0HV8AMjzzAtAAg0pFYtBOJpnBRNAYBOce71HrSaZoE6qS3flmL7RwPGhTCPT_Vd_4pcVrJ4';
 
 export const SCHOLAR_PORTRAIT = 'https://lh3.googleusercontent.com/aida-public/AB6AXuAkiO0jwX4DZ4vIBC-0poYci2lJEYHCsqwiiUECl5Ba6rebvbv2_PSmNzhlUrQCd8xHIUHikWL8UyYwoHRyU5mVSWncOShbksPdGnaHstHjJJeJGTOa4Vc7DxdiNk-MP2Fu2coDxtPK5Mr5byI4sxF_mNBPpe_h1LcW5Rl1uBcSu1pa8nnqx2IuwthCBXNglK99vzC5c_zgHuygwT1tK_QCsucYFUuifuDbyB7mQEdYcvavpb_Is5c5aA';
 
-export const prayerTimesToday = {
-  hijriDate: '۲۵ ربیع الاول ۱۴۴۸ھ',
-  hijriDateEn: '25 Rabi-ul-Awwal 1448 AH',
-  hijriDateAr: '٢٥ ربيع الأول ١٤٤٨ هـ',
-  gregorianDate: 'جمعرات ۲۱ ستمبر ۲۰۲۶ء',
-  gregorianDateEn: 'Thursday, 21 September 2026',
-  gregorianDateAr: 'الخميس ٢١ سبتمبر ٢٠٢٦ م',
-  times: [
-    { nameEn: 'Fajr', nameUr: 'فجر', nameAr: 'الفجر', time: '5:08 AM' },
-    { nameEn: 'Sunrise', nameUr: 'طلوع', nameAr: 'الشروق', time: '6:18 AM' },
-    { nameEn: 'Dhuhr', nameUr: 'ظہر', nameAr: 'الظهر', time: '12:28 PM' },
-    { nameEn: 'Asr', nameUr: 'عصر', nameAr: 'العصر', time: '4:48 PM' },
-    { nameEn: 'Maghrib', nameUr: 'مغرب', nameAr: 'المغرب', time: '6:32 PM', current: true },
-    { nameEn: 'Isha', nameUr: 'عشاء', nameAr: 'العشاء', time: '7:52 PM' },
-  ],
-};
+export const prayerTimesToday = getDefaultPrayerData();
 
 export const mockFatwas: Fatwa[] = [
   {
@@ -285,8 +271,8 @@ export const mockScholars: Scholar[] = [
       ur: 'صبح ۹ تا ۱۲ اور بعد نمازِ ظہر تا عصر (سوائے جمعۃ المبارک)',
       ar: 'من ٩ صباحاً حتى ١٢ ظهراً وبعد الظهر إلى العصر (عدا الجمعة)',
     },
-    phone: '+92 301 7671222',
-    whatsapp: '+92 301 7671222',
+    phone: '+92 333 2617671',
+    whatsapp: '+92 333 2617671',
   },
   {
     id: 'mufti-faisal-hayat',
@@ -357,8 +343,8 @@ export const mockScholars: Scholar[] = [
       ur: 'صبح ۱۰ تا دوپہر ۲ بجے',
       ar: 'من ١٠ صباحاً حتى ٢ ظهراً',
     },
-    phone: '+92 301 7671222',
-    whatsapp: '+92 301 7671222',
+    phone: '+92 333 2617671',
+    whatsapp: '+92 333 2617671',
   },
   {
     id: 'mufti-raihan',
@@ -619,9 +605,9 @@ export const mockNotifications: NotificationItem[] = [
 
 export const meezanBankAccount = {
   bankName: 'Meezan Bank Limited',
-  accountTitle: 'Darul Ifta Irshad Al-Saileen',
-  accountNumber: '0101-0105829312',
-  iban: 'PK64MEZN0001010105829312',
-  branch: 'Karachi Branch, Sindh, Pakistan',
+  accountTitle: 'FAISAL HAYAT',
+  accountNumber: '0183-0100450333',
+  iban: 'PK56MEZN0001830100450333',
+  branch: 'Meezan Bank Karachi, Sindh, Pakistan',
 };
 

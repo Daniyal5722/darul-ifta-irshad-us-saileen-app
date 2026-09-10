@@ -121,7 +121,7 @@ export const ScholarsScreen: React.FC<ScholarsScreenProps> = ({
           </button>
 
           <a
-            href="https://wa.me/923017671222"
+            href="https://wa.me/923332617671"
             target="_blank"
             rel="noopener noreferrer"
             className="px-3.5 h-10 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs font-semibold flex items-center justify-center gap-1.5 border border-white/10 active:scale-95 transition-all"

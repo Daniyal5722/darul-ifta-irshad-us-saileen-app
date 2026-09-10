@@ -384,7 +384,7 @@ export const AskQuestionScreen: React.FC<AskQuestionScreenProps> = ({
         {/* 8. Urgent WhatsApp Shortcut */}
         <div className="rounded-2xl bg-white dark:bg-[#132544] p-3.5 shadow-sm border border-[#E2E8F0] dark:border-white/5 flex items-center justify-between gap-3">
           <a
-            href="https://wa.me/923017671222"
+            href="https://wa.me/923332617671"
             target="_blank"
             rel="noopener noreferrer"
             className="w-10 h-10 rounded-full bg-[#10B981]/10 text-[#10B981] flex items-center justify-center shrink-0 active:scale-95 transition-transform"

@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
-import { Screen, Language, Fatwa } from '../types';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Screen, Language, Fatwa, DailyPrayerData } from '../types';
 import { translations } from '../data/translations';
-import { prayerTimesToday, mockFatwas, mockServices, SCHOLAR_PORTRAIT } from '../data/mockData';
+import { mockFatwas, mockServices, SCHOLAR_PORTRAIT } from '../data/mockData';
+import {
+  fetchLiveKarachiPrayerTimes,
+  getDefaultPrayerData,
+  determineActivePrayer,
+} from '../services/prayerAndCalendarService';
 import {
   Search,
   PhoneCall,
@@ -15,6 +20,9 @@ import {
   Clock,
   ArrowRight,
   Sparkles,
+  RefreshCw,
+  Sunrise,
+  Wifi,
 } from 'lucide-react';
 
 interface HomeScreenProps {
@@ -32,6 +40,53 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
 }) => {
   const t = translations[currentLanguage];
   const [searchQuery, setSearchQuery] = useState('');
+  const [prayerData, setPrayerData] = useState<DailyPrayerData>(() => getDefaultPrayerData());
+  const [isRefreshingPrayer, setIsRefreshingPrayer] = useState(false);
+  const [refreshSuccessText, setRefreshSuccessText] = useState<string | null>(null);
+
+  // Fetch online prayer times & auto-sync dates
+  const loadPrayerTimes = useCallback(async (isManual = false) => {
+    if (isManual) setIsRefreshingPrayer(true);
+    try {
+      const data = await fetchLiveKarachiPrayerTimes();
+      setPrayerData(data);
+      if (isManual) {
+        setRefreshSuccessText(
+          currentLanguage === 'ur'
+            ? 'انٹرنیٹ سے اوقات اپڈیٹ ہوگئے'
+            : currentLanguage === 'ar'
+            ? 'تم تحديث الأوقات عبر الإنترنت'
+            : 'Prayer times updated via Internet'
+        );
+        setTimeout(() => setRefreshSuccessText(null), 3000);
+      }
+    } catch (err) {
+      console.warn('Error refreshing prayer times:', err);
+    } finally {
+      if (isManual) setIsRefreshingPrayer(false);
+    }
+  }, [currentLanguage]);
+
+  useEffect(() => {
+    // Initial fetch from internet
+    loadPrayerTimes(false);
+
+    // Auto check every minute to update active prayer & date transition
+    const interval = setInterval(() => {
+      setPrayerData((prev) => {
+        const activeName = determineActivePrayer(prev.times);
+        return {
+          ...prev,
+          times: prev.times.map((item) => ({
+            ...item,
+            current: item.nameEn === activeName,
+          })),
+        };
+      });
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, [loadPrayerTimes]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,55 +96,142 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
     }
   };
 
+  const sunriseItem = prayerData.times.find((t) => t.nameEn === 'Sunrise');
+
   return (
     <div className="flex flex-col gap-4 pb-10">
-      {/* 1. Islamic Calendar & Karachi Prayer Times Card */}
+      {/* 1. Islamic Calendar & Live Karachi Prayer Times Card */}
       <section className="bg-white dark:bg-[#132544] rounded-2xl p-4 shadow-sm border border-[#E2E8F0] dark:border-white/5">
-        <div className="flex items-center justify-between mb-2">
+        {/* Top Header: Islamic Calendar title + Live Internet Status + Refresh Button */}
+        <div className="flex items-center justify-between mb-2 gap-2 flex-wrap">
           <div className="flex items-center gap-1.5 text-[#061A34] dark:text-[#D1AC5B]">
             <Calendar className="w-4 h-4 text-[#D4AF37]" />
             <span className="text-xs font-bold uppercase tracking-wider">{t.islamicCalendar}</span>
           </div>
-          <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#eff4ff] dark:bg-white/10 text-[#7a580f] dark:text-[#D1AC5B] text-xs font-medium">
-            <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
-            <span>{t.karachiTime}</span>
+
+          <div className="flex items-center gap-1.5">
+            <div
+              className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium transition-colors ${
+                prayerData.isOnline
+                  ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400'
+                  : 'bg-[#eff4ff] dark:bg-white/10 text-[#7a580f] dark:text-[#D1AC5B]'
+              }`}
+              title="طریقہ کار: جامعہ العلوم الاسلامیہ بنوری ٹاؤن کراچی (حنفی)"
+            >
+              <span
+                className={`w-2 h-2 rounded-full ${
+                  prayerData.isOnline ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'
+                }`}
+              />
+              <span className="text-[11px]">
+                {prayerData.isOnline
+                  ? currentLanguage === 'ur'
+                    ? 'انٹرنیٹ لائیو اوقات'
+                    : currentLanguage === 'ar'
+                    ? 'أوقات متصلة بالإنترنت'
+                    : 'Online Timings'
+                  : t.karachiTime}
+              </span>
+            </div>
+
+            {/* Manual Internet Namaz Check Button */}
+            <button
+              onClick={() => loadPrayerTimes(true)}
+              disabled={isRefreshingPrayer}
+              aria-label="Check Namaz Time via Internet"
+              title={
+                currentLanguage === 'ur'
+                  ? 'انٹرنیٹ سے نماز کے تازہ اوقات حاصل کریں'
+                  : 'Check latest prayer times via Internet'
+              }
+              className="p-1 rounded-lg bg-[#eff4ff] hover:bg-[#e0eaff] dark:bg-white/10 dark:hover:bg-white/15 text-[#061A34] dark:text-[#D1AC5B] active:scale-95 transition-all flex items-center justify-center cursor-pointer"
+            >
+              <RefreshCw
+                className={`w-3.5 h-3.5 ${isRefreshingPrayer ? 'animate-spin text-[#D4AF37]' : ''}`}
+              />
+            </button>
           </div>
         </div>
 
+        {/* Dynamic Dates Display (Auto-changing Islamic & Gregorian) */}
         <div className="flex items-baseline justify-between pt-0.5 border-b border-[#E2E8F0] dark:border-white/5 pb-2.5">
           <span className="font-arabic font-bold text-[#061A34] dark:text-white text-lg">
-            {currentLanguage === 'en' ? prayerTimesToday.hijriDateEn : prayerTimesToday.hijriDate}
+            {currentLanguage === 'en'
+              ? prayerData.hijriDateEn
+              : currentLanguage === 'ar'
+              ? prayerData.hijriDateAr
+              : prayerData.hijriDate}
           </span>
           <span className="text-xs text-[#75777e] dark:text-[#94A3B8]">
             {currentLanguage === 'en'
-              ? prayerTimesToday.gregorianDateEn
-              : prayerTimesToday.gregorianDate}
+              ? prayerData.gregorianDateEn
+              : currentLanguage === 'ar'
+              ? prayerData.gregorianDateAr
+              : prayerData.gregorianDate}
           </span>
         </div>
 
         {/* 5 Daily Prayer Times Grid */}
         <div className="grid grid-cols-5 gap-1.5 pt-3">
-          {prayerTimesToday.times
+          {prayerData.times
             .filter((time) => time.nameEn !== 'Sunrise')
             .map((item) => (
               <div
                 key={item.nameEn}
                 className={`flex flex-col items-center py-2 px-1 rounded-xl transition-all ${
                   item.current
-                    ? 'bg-[#061A34] text-white dark:bg-[#D4AF37] dark:text-[#061A34] shadow-sm'
+                    ? 'bg-[#061A34] text-white dark:bg-[#D4AF37] dark:text-[#061A34] shadow-sm ring-2 ring-[#D4AF37]/40'
                     : 'bg-[#eff4ff] dark:bg-[#061A34]/50 text-[#061A34] dark:text-white'
                 }`}
               >
-                <span className="text-[11px] opacity-80 leading-none mb-1">
-                  {currentLanguage === 'ur'
-                    ? item.nameUr
-                    : currentLanguage === 'ar'
-                    ? item.nameAr
-                    : item.nameEn}
+                <div className="flex items-center gap-1">
+                  <span className="text-[11px] opacity-85 leading-none mb-1 font-medium">
+                    {currentLanguage === 'ur'
+                      ? item.nameUr
+                      : currentLanguage === 'ar'
+                      ? item.nameAr
+                      : item.nameEn}
+                  </span>
+                  {item.current && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] dark:bg-[#061A34] -mt-1" />
+                  )}
+                </div>
+                <span className="text-xs font-bold leading-none">
+                  {item.time.replace(/ (AM|PM)/, '')}
                 </span>
-                <span className="text-xs font-bold leading-none">{item.time.replace(/ (AM|PM)/, '')}</span>
+                <span className="text-[9px] opacity-65 mt-0.5">
+                  {item.time.includes('AM') ? 'AM' : 'PM'}
+                </span>
               </div>
             ))}
+        </div>
+
+        {/* Sunrise & Calculation Source Strip */}
+        <div className="mt-2.5 pt-2 border-t border-[#E2E8F0]/60 dark:border-white/5 flex items-center justify-between text-[11px] text-[#75777e] dark:text-[#94A3B8]">
+          {sunriseItem && (
+            <div className="flex items-center gap-1">
+              <Sunrise className="w-3.5 h-3.5 text-[#D4AF37]" />
+              <span>
+                {currentLanguage === 'ur'
+                  ? `طلوعِ آفتاب: ${sunriseItem.time}`
+                  : currentLanguage === 'ar'
+                  ? `الشروق: ${sunriseItem.time}`
+                  : `Sunrise: ${sunriseItem.time}`}
+              </span>
+            </div>
+          )}
+
+          <span className="text-[10px] text-[#7a580f] dark:text-[#D1AC5B] truncate max-w-[200px]">
+            {refreshSuccessText ? (
+              <span className="text-emerald-600 dark:text-emerald-400 font-semibold animate-pulse">
+                ✓ {refreshSuccessText}
+              </span>
+            ) : (
+              currentLanguage === 'ur'
+                ? 'معیار: جامعہ بنوری ٹاؤن (حنفی)'
+                : 'Method: Banuri Town (Hanafi)'
+            )}
+          </span>
         </div>
       </section>
 
@@ -120,7 +262,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             </button>
 
             <a
-              href="tel:+923017671222"
+              href="tel:+923332617671"
               className="h-12 px-4 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-sm flex items-center justify-center gap-2 border border-white/10 active:scale-98 transition-all"
             >
               <PhoneCall className="w-4 h-4 text-[#D1AC5B]" />
@@ -379,11 +521,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
 
         <div className="flex flex-col gap-2 text-xs">
           <a
-            href="tel:+923017671222"
+            href="tel:+923332617671"
             className="flex items-center justify-between p-2.5 rounded-xl bg-[#f8f9ff] dark:bg-[#061A34] text-[#061A34] dark:text-white"
           >
             <span className="font-bold tracking-wider" dir="ltr">
-              +92 301 7671222
+              +92 333 2617671
             </span>
             <span className="text-[#75777e] dark:text-[#94A3B8] font-medium">{t.phone}</span>
           </a>

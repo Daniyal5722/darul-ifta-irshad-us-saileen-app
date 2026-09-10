@@ -24,13 +24,13 @@ export const SocialMediaScreen: React.FC<SocialMediaScreenProps> = ({
 
   const channels = [
     {
-      name: 'یوٹیوب آفیشل چینل',
-      nameEn: 'YouTube Official Channel',
-      desc: 'حضرت مولانا مفتی عبد المنان صاحب کے تفصیلی خطابات، بیانات اور فتاویٰ کی ویڈیوز۔',
+      name: 'یوٹیوب آفیشل چینل (@MuftiFaisalHayat)',
+      nameEn: 'YouTube Official Channel (@MuftiFaisalHayat)',
+      desc: 'حضرت مولانا مفتی فیصل حیات صاحب کے تفصیلی خطابات، بیانات اور فتاویٰ کی ویڈیوز۔',
       followers: '۵۰,۰۰۰+ سبسکرائبرز',
       icon: Youtube,
       color: '#BE123C',
-      link: 'https://youtube.com',
+      link: 'https://www.youtube.com/@MuftiFaisalHayat',
       badge: 'ویریفائیڈ چینل',
     },
     {
@@ -40,7 +40,7 @@ export const SocialMediaScreen: React.FC<SocialMediaScreenProps> = ({
       followers: '۲۵,۰۰۰+ فالوورز',
       icon: MessageCircle,
       color: '#10B981',
-      link: 'https://whatsapp.com/channel',
+      link: 'https://whatsapp.com/channel/0029VaCc5dK7T8bclVGHu20Q',
       badge: 'ڈیلی اپڈیٹس',
     },
     {

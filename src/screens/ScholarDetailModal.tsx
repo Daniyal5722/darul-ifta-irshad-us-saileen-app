@@ -144,7 +144,7 @@ export const ScholarDetailModal: React.FC<ScholarDetailModalProps> = ({
         </button>
 
         <a
-          href="https://wa.me/923017671222"
+          href="https://wa.me/923332617671"
           target="_blank"
           rel="noopener noreferrer"
           className="w-full h-12 rounded-xl bg-white dark:bg-[#132544] text-[#061A34] dark:text-white text-xs font-semibold flex items-center justify-center gap-2 border border-[#E2E8F0] dark:border-white/10 active:scale-95 transition-all"

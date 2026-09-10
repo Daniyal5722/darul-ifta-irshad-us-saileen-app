@@ -68,7 +68,7 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({
       <section className="grid grid-cols-2 gap-2.5">
         {/* Phone Dial */}
         <a
-          href="tel:+923017671222"
+          href="tel:+923332617671"
           className="p-3.5 rounded-2xl bg-white dark:bg-[#132544] shadow-sm border border-[#E2E8F0] dark:border-white/5 flex flex-col gap-2 cursor-pointer hover:border-[#D4AF37]/40 active:scale-95 transition-all"
         >
           <div className="w-10 h-10 rounded-xl bg-[#eff4ff] dark:bg-[#061A34] text-[#061A34] dark:text-[#D1AC5B] flex items-center justify-center">
@@ -77,14 +77,14 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({
           <div className="text-left rtl:text-right">
             <span className="text-[11px] text-[#75777e] dark:text-[#94A3B8] block">{t.phone}</span>
             <span className="text-xs font-bold text-[#061A34] dark:text-white tracking-wider block" dir="ltr">
-              +92 301 7671222
+              +92 333 2617671
             </span>
           </div>
         </a>
 
         {/* WhatsApp */}
         <a
-          href="https://wa.me/923017671222"
+          href="https://wa.me/923332617671"
           target="_blank"
           rel="noopener noreferrer"
           className="p-3.5 rounded-2xl bg-white dark:bg-[#132544] shadow-sm border border-[#E2E8F0] dark:border-white/5 flex flex-col gap-2 cursor-pointer hover:border-[#D4AF37]/40 active:scale-95 transition-all"
