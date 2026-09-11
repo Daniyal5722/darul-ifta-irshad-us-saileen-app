@@ -1,7 +1,7 @@
 import React from 'react';
 import { Screen, Language } from '../types';
 import { translations } from '../data/translations';
-import { OFFICIAL_LOGO, SCHOLAR_PORTRAIT } from '../data/mockData';
+import { OFFICIAL_LOGO } from '../data/mockData';
 import {
   Info,
   ShieldCheck,
@@ -127,12 +127,8 @@ export const AboutScreen: React.FC<AboutScreenProps> = ({
 
       {/* 4. Leadership Quote Card */}
       <section className="rounded-2xl bg-[#FBF9F3] dark:bg-[#132544] p-4 text-center border border-[#D4AF37]/30 flex flex-col items-center gap-2">
-        <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-sm">
-          <img
-            src={SCHOLAR_PORTRAIT}
-            alt="Mufti Abdul Hannan Sahib"
-            className="w-full h-full object-cover"
-          />
+        <div className="w-14 h-14 rounded-full bg-[#061A34] border-2 border-[#D4AF37] shadow-sm flex flex-col items-center justify-center p-1">
+          <BookOpen className="w-6 h-6 text-[#D4AF37]" />
         </div>
         <p className="font-urdu text-xs sm:text-sm text-[#061A34] dark:text-white leading-relaxed italic">
           "ہماری اولین کوشش یہ ہے کہ ہر مسلمان کو اس کی انفرادی، معاشی اور معاشرتی زندگی میں رضائے الٰہی کے مطابق زندگی گزارنے کا صحیح طریقہ میسر آئے۔"

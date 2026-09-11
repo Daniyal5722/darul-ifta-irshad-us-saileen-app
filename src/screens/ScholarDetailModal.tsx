@@ -1,7 +1,6 @@
 import React from 'react';
 import { Screen, Language, Scholar } from '../types';
 import { translations } from '../data/translations';
-import { SCHOLAR_PORTRAIT } from '../data/mockData';
 import {
   GraduationCap,
   Award,
@@ -34,15 +33,13 @@ export const ScholarDetailModal: React.FC<ScholarDetailModalProps> = ({
     <div className="flex flex-col gap-4 pb-12">
       {/* 1. Scholar Hero Banner */}
       <section className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#061A34] via-[#132544] to-[#0e1c32] p-5 text-white shadow-lg border border-[#D4AF37]/35 flex flex-col items-center text-center gap-3">
-        <div className="w-24 h-24 rounded-full overflow-hidden bg-white/10 p-1 border-2 border-[#D4AF37] shadow-lg">
-          <img
-            src={scholar.isLead ? SCHOLAR_PORTRAIT : SCHOLAR_PORTRAIT}
-            alt={scholar.name[currentLanguage]}
-            className="w-full h-full object-cover rounded-full"
-            onError={(e) => {
-              (e.target as HTMLElement).style.display = 'none';
-            }}
-          />
+        <div className="w-22 h-22 sm:w-24 sm:h-24 rounded-full bg-[#061A34] border-2 border-[#D4AF37] shadow-xl flex flex-col items-center justify-center p-2 relative">
+          <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-white/5 border border-[#D4AF37]/30 flex flex-col items-center justify-center">
+            <BookOpen className="w-8 h-8 text-[#D4AF37]" />
+            <span className="text-[9px] text-[#D1AC5B] font-bold font-urdu leading-none mt-0.5">
+              {scholar.isLead ? 'رئیس دارالافتاء' : 'مفتیِ شرع'}
+            </span>
+          </div>
         </div>
 
         <div className="flex flex-col items-center gap-1">

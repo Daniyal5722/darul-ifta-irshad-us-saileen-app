@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Screen, Language, Scholar } from '../types';
 import { translations } from '../data/translations';
-import { mockScholars, SCHOLAR_PORTRAIT } from '../data/mockData';
+import { mockScholars } from '../data/mockData';
 import {
   GraduationCap,
   Award,
@@ -67,15 +67,9 @@ export const ScholarsScreen: React.FC<ScholarsScreenProps> = ({
         </div>
 
         <div className="flex gap-3.5 items-center flex-row-reverse rtl:flex-row">
-          <div className="w-20 h-20 rounded-full overflow-hidden bg-white/10 p-0.5 shrink-0 border-2 border-[#D4AF37] shadow-md">
-            <img
-              src={SCHOLAR_PORTRAIT}
-              alt={leadScholar.name[currentLanguage]}
-              className="w-full h-full object-cover rounded-full"
-              onError={(e) => {
-                (e.target as HTMLElement).style.display = 'none';
-              }}
-            />
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#061A34] shrink-0 border-2 border-[#D4AF37] shadow-md flex flex-col items-center justify-center p-1">
+            <BookOpen className="w-7 h-7 sm:w-8 sm:h-8 text-[#D4AF37]" />
+            <span className="text-[9px] text-[#D1AC5B] font-bold font-urdu leading-none mt-0.5">رئیس</span>
           </div>
 
           <div className="flex flex-col min-w-0 flex-1 text-left rtl:text-right">

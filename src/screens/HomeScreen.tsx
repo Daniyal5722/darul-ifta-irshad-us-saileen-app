@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Screen, Language, Fatwa, DailyPrayerData } from '../types';
 import { translations } from '../data/translations';
-import { mockFatwas, mockServices, SCHOLAR_PORTRAIT } from '../data/mockData';
+import { mockFatwas, mockServices } from '../data/mockData';
 import {
   fetchLiveKarachiPrayerTimes,
   getDefaultPrayerData,
@@ -23,6 +23,7 @@ import {
   RefreshCw,
   Sunrise,
   Wifi,
+  BookOpen,
 } from 'lucide-react';
 
 interface HomeScreenProps {
@@ -374,22 +375,16 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         </div>
 
         <div className="flex gap-3 items-center flex-row-reverse rtl:flex-row mb-3">
-          <div className="w-16 h-16 shrink-0 rounded-full overflow-hidden bg-[#061A34] p-0.5 shadow-md border-2 border-[#D4AF37]">
-            <img
-              src={SCHOLAR_PORTRAIT}
-              alt="Lead Scholar"
-              className="w-full h-full object-cover rounded-full"
-              onError={(e) => {
-                (e.target as HTMLElement).style.display = 'none';
-              }}
-            />
+          <div className="w-16 h-16 shrink-0 rounded-full bg-[#061A34] shadow-md border-2 border-[#D4AF37] flex flex-col items-center justify-center p-1">
+            <BookOpen className="w-6 h-6 text-[#D4AF37]" />
+            <span className="text-[9px] text-[#D1AC5B] font-bold font-urdu leading-none mt-0.5">رئیس</span>
           </div>
           <div className="flex flex-col min-w-0 flex-1 text-left rtl:text-right">
             <h3 className="font-bold text-base text-[#061A34] dark:text-white leading-tight truncate">
               حضرت مولانا مفتی عبد المنان صاحب
             </h3>
             <p className="text-xs text-[#7a580f] dark:text-[#D1AC5B] font-semibold mt-0.5">
-              Mufti Abdul Hannan Sahib
+              Hazrat Maulana Mufti Abdul Mannan Sahib
             </p>
             <p className="text-xs text-[#75777e] dark:text-[#94A3B8] mt-1 leading-snug line-clamp-2">
               بانی و رئیس دارالافتاء و شیخ الحدیث، جامعہ کے سینئر استاد الحدیث و مفتی

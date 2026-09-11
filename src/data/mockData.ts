@@ -3,8 +3,6 @@ import { getDefaultPrayerData } from '../services/prayerAndCalendarService';
 
 export const OFFICIAL_LOGO = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDUHYdlVTJB5dX0q9IcNeBYGZSZw5lJFQjQz-6yvhqgCA500_nbfqV12r2MLXLsSywhoLifcrc8hdwLnwUG842MKDwN2OYX5SbPR5b-zeuy_2cFFQI3aBvvjG8xqOGXheA3f9y81AH6-Aq4Q483No_UzpXeVYcjNWNyB4NsIWrtcjf1Qa3FVK04kRylqTyj0HV8AMjzzAtAAg0pFYtBOJpnBRNAYBOce71HrSaZoE6qS3flmL7RwPGhTCPT_Vd_4pcVrJ4';
 
-export const SCHOLAR_PORTRAIT = 'https://lh3.googleusercontent.com/aida-public/AB6AXuAkiO0jwX4DZ4vIBC-0poYci2lJEYHCsqwiiUECl5Ba6rebvbv2_PSmNzhlUrQCd8xHIUHikWL8UyYwoHRyU5mVSWncOShbksPdGnaHstHjJJeJGTOa4Vc7DxdiNk-MP2Fu2coDxtPK5Mr5byI4sxF_mNBPpe_h1LcW5Rl1uBcSu1pa8nnqx2IuwthCBXNglK99vzC5c_zgHuygwT1tK_QCsucYFUuifuDbyB7mQEdYcvavpb_Is5c5aA';
-
 export const prayerTimesToday = getDefaultPrayerData();
 
 export const mockFatwas: Fatwa[] = [
@@ -238,11 +236,11 @@ export const mockFatwas: Fatwa[] = [
 
 export const mockScholars: Scholar[] = [
   {
-    id: 'mufti-abdul-hannan',
+    id: 'mufti-abdul-mannan',
     name: {
-      en: 'Hazrat Maulana Mufti Abdul Hannan Sahib',
+      en: 'Hazrat Maulana Mufti Abdul Mannan Sahib',
       ur: 'حضرت مولانا مفتی عبد المنان صاحب',
-      ar: 'فضيلة الشيخ المفتي عبد الحنان',
+      ar: 'فضيلة الشيخ المفتي عبد المنان',
     },
     title: {
       en: 'Chief Mufti & Patron-in-Chief',
@@ -259,7 +257,7 @@ export const mockScholars: Scholar[] = [
       ur: 'گزشتہ دو دہائیوں سے ترویجِ علومِ شرعیہ، تدریسِ حدیث اور ہزاروں فتاویٰ کی تصدیق و اجراء کے فرائض سرانجام دے رہے ہیں۔',
       ar: 'أمضى أكثر من عقدين في خدمة العلوم الشرعية وتدريس الحديث النبوي الشريف وإصدار الفتاوى المعتمدة.',
     },
-    image: SCHOLAR_PORTRAIT,
+    image: '',
     areasOfExpertise: ['فقہ اسلامی', 'تخصص فی الافتاء', 'علوم الحدیث', 'اسلامی مالیات'],
     department: 'دارالافتاء و شیخ الحدیث',
     yearsOfTeaching: 22,
@@ -492,9 +490,9 @@ export const mockPublications: Publication[] = [
       ar: 'فتاوى إرشاد السائلين (المجلد الأول: كتاب الإيمان والعبادات)',
     },
     author: {
-      en: 'Hazrat Maulana Mufti Abdul Hannan Sahib',
+      en: 'Hazrat Maulana Mufti Abdul Mannan Sahib',
       ur: 'حضرت مولانا مفتی عبد المنان صاحب مدظلہ',
-      ar: 'فضيلة الشيخ المفتي عبد الحنان',
+      ar: 'فضيلة الشيخ المفتي عبد المنان',
     },
     category: 'Fiqh',
     pages: 640,
